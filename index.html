@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Virtual Gamepad</title>
+    <style>
+      * {
+        font-family: "Bebas Neue", sans-serif;
+      }
+      :root {
+        --fancy-text-shadow: -1px -1px 1px rgba(255, 255, 255, 1),
+          2px 2px 1px rgba(0, 0, 0, 1);
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 10px;
+        background-color: #333;
+      }
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+
+        /* Add space for the edit panel */
+        height: calc(100vh - 110px);
+        width: 100%;
+      }
+      .grid-item {
+        color: #fff;
+        background-color: #ddd;
+        border: 3px solid rgba(255, 255, 255, 0.4);
+        border-color: rgba(255, 255, 255, 0.4) rgba(0, 0, 0, 0.4)
+          rgba(0, 0, 0, 0.4) rgba(255, 255, 255, 0.4) !important ;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+        touch-action: manipulation;
+        border-radius: 10px;
+        align-content: center;
+        font-weight: 400;
+        font-size: 200%;
+        line-height: 0.8;
+        font-family: "Bebas Neue", sans-serif;
+        text-transform: uppercase;
+        text-shadow: var(--fancy-text-shadow);
+        transition: transform 0.3s, opacity 0.3s;
+      }
+      .grid-item:active {
+        border: none !important;
+        animation: growAndFade 0.2s forwards;
+      }
+
+      @keyframes growAndFade {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+          filter: brightness(100%);
+        }
+        99% {
+          transform: scale(1.2); /* Grow by 10% */
+          opacity: 1; /* Fully visible */
+          filter: brightness(55000000%);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1; /* Fade out */
+          filter: brightness(100%);
+        }
+      }
+
+      .edit-mode .grid-item {
+        cursor: move;
+      }
+      .gray-button,
+      .hidden-button {
+        opacity: 0.4;
+      }
+      .red-button {
+        background-color: hsl(0, 100%, 50%);
+      }
+      .blue-button {
+        background-color: #0080ff;
+      }
+      .green-button {
+        background-color: #2e9200;
+      }
+      .yellow-button {
+        background-color: #ffd000; color:#000;text-shadow:none;
+      }
+      .orange-button {
+        background-color: rgb(240, 116, 0);
+      }
+      .purple-button {
+        background-color: #a800fc;
+        color: #fff;
+      }
+      .gray-button {
+        background-color: #dddddd;
+      }
+      .white-button {
+        background-color: #ffffff;
+        color: #000;
+        text-shadow: none;
+      }
+      .bold-text {
+        font-weight: bold;
+      }
+      .edit-panel {z-index:9999;
+        position: fixed;
+        margin-bottom: -50px;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #00000000;
+        color: white;
+        padding: 10px;
+        justify-content: space-between;
+        align-items: center;
+        width: 30px;
+      }
+      .edit-mode .edit-panel * {
+        border-radius: 10px;
+      }
+      .edit-mode .edit-panel {
+        text-align: center;
+        position: fixed;
+
+        border-radius: 10px;
+      }
+
+      .button-edit-mode * {
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .edit-panel.button-edit-mode {
+        left: 50%;
+        top: 50%;
+        margin-left: -150px;
+        width: 300px;
+      }
+
+      .edit-mode .edit-panel * {
+        font-size: 150%;
+      }
+      #editToggle {
+        width: 50px;
+        height: 50px;
+        border-radius: 0px 0px 10px 0px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        border: none;
+        margin-left: -10px;
+        margin-top: -10px;
+      }
+      .edit-mode #editToggle {
+        width: initial;
+        height: initial;
+        border-radius: initial;
+      }
+      #buttonText,
+      #buttonColor {
+        padding: 0px !important;
+        border: none !important;
+      }
+
+      #buttonEditor {
+        display: none;
+      }
+      .edit-mode #buttonEditor * {
+        width: 100% !important;
+      }
+
+      .edit-mode #editToggle,
+      #saveButton {
+        background: #2e9200;
+        color: #fff;
+        border-radius: 10px;
+        border: 0;
+        padding: 5px 15px;
+        border-radius: 0px 0px 10px 0px;
+        width: 300px !important;
+      }
+      .button-edit-mode #editToggle,
+      #saveButton {
+        border-radius: 500px !important;
+      }
+      .button-edit-mode * {
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .button-edit-mode {
+        background: #0000005f;
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      /*
+      setInterval(() => {
+        location.reload();
+      }, 500);*/
+
+      const gridItems = document.querySelectorAll(".grid-item");
+
+      gridItems.forEach((item) => {
+        // Function to start the animation
+        const startAnimation = () => {
+          // Remove the class if it exists to restart the animation
+          item.classList.remove("animate");
+
+          // Use a small timeout to ensure the class is re-added properly
+          setTimeout(() => {
+            item.classList.add("animate");
+          }, 10); // 10ms delay ensures the animation restarts
+        };
+
+        // Add event listeners for both touch and mouse interactions
+        item.addEventListener("touchstart", (e) => {
+          e.preventDefault(); // Prevent default to ensure touchstart behavior
+          startAnimation();
+        });
+
+        item.addEventListener("mousedown", (e) => {
+          e.preventDefault(); // Prevent default to ensure mousedown behavior
+          startAnimation();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <span class="edit-panel" id="edit-panel">
+      <div id="buttonEditor">
+        <input type="text" id="buttonText" placeholder="Button Text" />
+        <select id="buttonColor">
+          <option class="red-button" value="red-button">Red</option>
+          <option class="blue-button" value="blue-button">Blue</option>
+          <option class="green-button" value="green-button">Green</option>
+          <option class="yellow-button" value="yellow-button">Yellow</option>
+          <option class="orange-button" value="orange-button">Orange</option>
+          <option class="purple-button" value="purple-button">Purple</option>
+          <option class="white-button" value="white-button">White</option>
+          <option class="gray-button" value="gray-button">Gray/Disabled</option>
+        </select>
+        <button id="saveButton">Save Button</button>
+      </div>
+      <button id="editToggle">✏️</button>
+    </span>
+    <div class="grid-container" id="grid-container"></div>
+
+    <script>
+      let ws;
+      let isEditMode = false;
+      let currentEditButton = null;
+      let buttonConfig = {};
+
+      function connectWebSocket() {
+        // IMPORTANT: Replace 'localhost' with your PC's IP address (e.g., "ws://192.168.0.33:8765")
+        ws = new WebSocket("ws://localhost:8765");
+
+        ws.onopen = () => {
+          console.log("Connected to WebSocket server");
+          ws.send("get_config");
+        };
+
+        ws.onmessage = (event) => {
+          console.log("Received:", event.data);
+          buttonConfig = JSON.parse(event.data);
+          createButtons(buttonConfig);
+        };
+
+        ws.onclose = () => {
+          console.log("Disconnected from WebSocket server");
+          setTimeout(connectWebSocket, 1000);
+        };
+
+        ws.onerror = (error) => {
+          console.error("WebSocket error:", error);
+        };
+      }
+
+      const selectElement = document.getElementById("buttonColor");
+      var currentShade = document.getElementById("buttonColor");
+      // Add an event listener for the 'change' event
+      selectElement.addEventListener("change", (event) => {
+        // Log the selected color to the console
+        console.log(event.target.value);
+        console.log(currentShade.value.replace("-button", ""));
+        var theShade = currentShade.value.replace("-button", "");
+        currentShade.style.background = theShade;
+        // var baseColor = str.replace(currentShade.value, "-");
+        //   currentShade.style("background", )
+      });
+
+      function createButtons(config) {
+        const container = document.getElementById("grid-container");
+        container.innerHTML = "";
+        const sortedButtons = Object.entries(config).sort(
+          (a, b) => a[1].position - b[1].position
+        );
+
+        for (let [buttonId, buttonData] of sortedButtons) {
+          const button = document.createElement("div");
+          button.id = buttonId;
+          button.className = `grid-item ${buttonData.classes}`;
+          button.innerText = buttonData.name;
+          button.ondragstart = dragStart;
+          button.ondragover = allowDrop;
+          button.ondrop = drop;
+          button.onclick = editButton;
+          button.addEventListener(
+            "touchstart",
+            (e) => handleButtonPress(e, buttonId, "press"),
+            { passive: false }
+          );
+          button.addEventListener(
+            "touchend",
+            (e) => handleButtonPress(e, buttonId, "release"),
+            { passive: false }
+          );
+          button.addEventListener("mousedown", (e) =>
+            handleButtonPress(e, buttonId, "press")
+          );
+          button.addEventListener("mouseup", (e) =>
+            handleButtonPress(e, buttonId, "release")
+          );
+          button.addEventListener("mouseleave", (e) =>
+            handleButtonPress(e, buttonId, "release")
+          );
+          container.appendChild(button);
+        }
+        updateDraggable();
+      }
+
+      function updateDraggable() {
+        const buttons = document.querySelectorAll(".grid-item");
+        buttons.forEach((button) => {
+          button.draggable = isEditMode;
+        });
+      }
+
+      function handleButtonPress(e, buttonId, action) {
+        if (!isEditMode) {
+          e.preventDefault();
+          sendButtonCommand(buttonId, action);
+        }
+      }
+
+      function sendButtonCommand(buttonId, action) {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+          const command = `${buttonId}_${action}`;
+          // console.log("Sending command:", command);
+          ws.send(command);
+        } else {
+          console.error("WebSocket is not open");
+        }
+      }
+
+      function dragStart(e) {
+        if (!isEditMode) return;
+        e.dataTransfer.setData("text", e.target.id);
+      }
+
+      function allowDrop(e) {
+        if (!isEditMode) return;
+        e.preventDefault();
+      }
+
+      function drop(e) {
+        var currentCollor = document.getElementById("buttonColor").value;
+        console.log(currentCollor);
+
+        if (!isEditMode) return;
+        e.preventDefault();
+        var data = e.dataTransfer.getData("text");
+        var draggedElement = document.getElementById(data);
+        var dropZone = e.target.closest(".grid-item");
+
+        //document.getElementById("buttonColor").background = currentColor;
+        if (dropZone && draggedElement !== dropZone) {
+          // Swap positions
+          let tempPosition = buttonConfig[draggedElement.id].position;
+          buttonConfig[draggedElement.id].position =
+            buttonConfig[dropZone.id].position;
+          buttonConfig[dropZone.id].position = tempPosition;
+
+          // Update the display
+          createButtons(buttonConfig);
+
+          // Save the new configuration
+          saveButtonConfig();
+        }
+      }
+
+      function editButton(e) {
+        if (!isEditMode) return;
+        currentEditButton = e.target;
+        document.getElementById("buttonText").value =
+          currentEditButton.innerText;
+        document.getElementById("buttonColor").value =
+          currentEditButton.className
+            .split(" ")
+            .find((c) => c.endsWith("-button")) || "gray-button";
+        document.getElementById("buttonEditor").style.display = "inline-block";
+        var currentShade = document.getElementById("buttonColor");
+
+        var theShade = currentShade.value.replace("-button", "");
+        currentShade.style.background = theShade;
+        document.getElementById("edit-panel").classList.add("button-edit-mode");
+      }
+
+      function saveButtonConfig() {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+          ws.send("save_config:" + JSON.stringify(buttonConfig));
+        }
+      }
+
+      document
+        .getElementById("editToggle")
+        .addEventListener("click", function () {
+          isEditMode = !isEditMode;
+          document.body.classList.toggle("edit-mode");
+          this.innerText = isEditMode ? "Save Layout" : "✏️";
+          document
+            .getElementById("edit-panel")
+            .classList.remove("button-edit-mode");
+          document.getElementById("buttonEditor").style.display = "none";
+          updateDraggable();
+          if (!isEditMode) {
+            saveButtonConfig();
+          }
+          saveButtonConfig();
+        });
+
+      document
+
+        .getElementById("saveButton")
+        .addEventListener("click", function () {
+       
+          if (currentEditButton) {
+            let buttonId = currentEditButton.id;
+            buttonConfig[buttonId].name =
+              document.getElementById("buttonText").value;
+            buttonConfig[buttonId].classes =
+              document.getElementById("buttonColor").value;
+            createButtons(buttonConfig);
+            saveButtonConfig();
+            document.getElementById("buttonEditor").style.display = "none";
+          }
+        });
+
+      connectWebSocket();
+
+      // Get the <select> element by its ID
+    </script>
+  </body>
+</html>

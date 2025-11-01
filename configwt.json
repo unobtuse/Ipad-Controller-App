@@ -1,0 +1,127 @@
+{
+    "button_1": {
+        "name": "BVR",
+        "classes": "green-button",
+        "position": 10
+    },
+    "button_2": {
+        "name": "Brake",
+        "classes": "red-button",
+        "position": 16
+    },
+    "button_3": {
+        "name": "SWITCH PRIM",
+        "classes": "blue-button",
+        "position": 3
+    },
+    "button_4": {
+        "name": "SWITCH WEP SEC",
+        "classes": "blue-button",
+        "position": 15
+    },
+    "button_5": {
+        "name": "AUTO WEP SEL",
+        "classes": "blue-button",
+        "position": 2
+    },
+    "button_6": {
+        "name": "SEARCH MODE",
+        "classes": "green-button",
+        "position": 9
+    },
+    "button_7": {
+        "name": "Rocket Comp",
+        "classes": "purple-button",
+        "position": 12
+    },
+    "button_8": {
+        "name": "BALISTIC COMP",
+        "classes": "purple-button",
+        "position": 13
+    },
+    "button_9": {
+        "name": "TOGGLE FLAPS",
+        "classes": "yellow-button",
+        "position": 19
+    },
+    "button_10": {
+        "name": "\ud83c\udf87 FLARES",
+        "classes": "white-button",
+        "position": 21
+    },
+    "button_11": {
+        "name": "SCOPE SCALE",
+        "classes": "green-button",
+        "position": 5
+    },
+    "button_12": {
+        "name": "SWEEP CLOSE",
+        "classes": "orange-button",
+        "position": 8
+    },
+    "button_13": {
+        "name": "GEAR",
+        "classes": "yellow-button",
+        "position": 18
+    },
+    "button_14": {
+        "name": "AIR BRAKE",
+        "classes": "yellow-button",
+        "position": 20
+    },
+    "button_15": {
+        "name": "OPEN BOMB BAY",
+        "classes": "yellow-button",
+        "position": 17
+    },
+    "button_16": {
+        "name": "SELECT TARGET",
+        "classes": "green-button",
+        "position": 4
+    },
+    "button_17": {
+        "name": "LOCK",
+        "classes": "green-button",
+        "position": 11
+    },
+    "button_18": {
+        "name": "Center",
+        "classes": "orange-button",
+        "position": 1
+    },
+    "button_19": {
+        "name": "\ud83d\uddfa\ufe0f MAP",
+        "classes": "white-button",
+        "position": 25
+    },
+    "button_20": {
+        "name": "Cockpit",
+        "classes": "yellow-button",
+        "position": 7
+    },
+    "button_21": {
+        "name": "\ud83d\udcf8",
+        "classes": "white-button",
+        "position": 6
+    },
+    "button_22": {
+        "name": "Bomb view",
+        "classes": "yellow-button",
+        "position": 14
+    },
+    "button_23": {
+        "name": "\ud83c\udfaf FIRE MISSILE",
+        "classes": "red-button",
+        "position": 23
+    },
+    "button_24": {
+        "name": "\ud83d\udca3 DROP BOMB",
+        "classes": "red-button",
+        "position": 24
+    },
+    "button_25": {
+        "name": "\ud83d\ude80 FIRE ROCKET",
+        "classes": "red-button",
+        "position": 22
+    }
+}

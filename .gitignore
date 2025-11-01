@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.code-workspace
+
+# Logs
+*.log
+server_debug.log
+error.log
+
+# Configuration (optional - uncomment if you don't want to share your config)
+# config.json
+# configwt.json
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Node modules (if present)
+node_modules/
+MyVirtualGamepad/
+
+# Working directories
+Working1/
+
+# Python cache
+*.pyc
+
+# Other
+.pytest_cache/
+.coverage
+htmlcov/
+

@@ -1,0 +1,102 @@
+{
+    "button_1": {
+        "name": "COCKPIT",
+        "classes": "purple-button"
+    },
+    "button_2": {
+        "name": "AIRCRAFT",
+        "classes": "purple-button"
+    },
+    "button_3": {
+        "name": "FLY BY",
+        "classes": "purple-button"
+    },
+    "button_4": {
+        "name": "Mounted",
+        "classes": "purple-button"
+    },
+    "button_5": {
+        "name": "Nearest ac",
+        "classes": "purple-button"
+    },
+    "button_6": {
+        "name": "Released wep",
+        "classes": "purple-button"
+    },
+    "button_7": {
+        "name": "GROUND",
+        "classes": "purple-button"
+    },
+    "button_8": {
+        "name": "Ship",
+        "classes": "purple-button"
+    },
+    "button_9": {
+        "name": "THEATER",
+        "classes": "purple-button"
+    },
+    "button_10": {
+        "name": "Airport",
+        "classes": "purple-button"
+    },
+    "button_11": {
+        "name": "",
+        "classes": "hidden-button"
+    },
+    "button_12": {
+        "name": "",
+        "classes": "hidden-button"
+    },
+    "button_13": {
+        "name": "Auto start",
+        "classes": "green-button"
+    },
+    "button_14": {
+        "name": "",
+        "classes": "hidden-button"
+    },
+    "button_15": {
+        "name": "",
+        "classes": "hidden-button"
+    },
+    "button_16": {
+        "name": "",
+        "classes": "hidden-button"
+    },
+    "button_17": {
+        "name": "",
+        "classes": "hidden-button"
+    },
+    "button_18": {
+        "name": "",
+        "classes": "hidden-button"
+    },
+    "button_19": {
+        "name": "",
+        "classes": "hidden-button"
+    },
+    "button_20": {
+        "name": "Open",
+        "classes": "yellow-button"
+    },
+    "button_21": {
+        "name": "",
+        "classes": "hidden-button"
+    },
+    "button_22": {
+        "name": "",
+        "classes": "hidden-button"
+    },
+    "button_23": {
+        "name": "",
+        "classes": "hidden-button"
+    },
+    "button_24": {
+        "name": "Park",
+        "classes": "red-button"
+    },
+    "button_25": {
+        "name": "Close",
+        "classes": "yellow-button"
+    }
+}
