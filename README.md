@@ -34,8 +34,8 @@ A customizable, web-based virtual gamepad that turns your iPad, tablet, or any d
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/unobtuse/virtual-gamepad.git
-   cd virtual-gamepad
+   git clone https://github.com/unobtuse/Ipad-Controller-App.git
+   cd Ipad-Controller-App
    ```
 
 2. **Create a virtual environment** (recommended)
