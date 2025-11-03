@@ -263,27 +263,44 @@
       let buttonConfig = {};
 
       function connectWebSocket() {
-        // IMPORTANT: Replace 'localhost' with your PC's IP address (e.g., "ws://192.168.0.33:8765")
-        ws = new WebSocket("ws://localhost:8765");
+        // IMPORTANT: Replace 'localhost' with your PC's IP address (e.g., "ws://192.168.0.154:8765")
+        const wsUrl = "ws://192.168.0.154:8765";
+        console.log("Attempting to connect to:", wsUrl);
+        
+        try {
+          ws = new WebSocket(wsUrl);
+        } catch (error) {
+          console.error("Failed to create WebSocket:", error);
+          setTimeout(connectWebSocket, 3000);
+          return;
+        }
 
         ws.onopen = () => {
-          console.log("Connected to WebSocket server");
+          console.log("✅ Connected to WebSocket server");
+          document.body.style.backgroundColor = "#333"; // Reset background
           ws.send("get_config");
         };
 
         ws.onmessage = (event) => {
-          console.log("Received:", event.data);
-          buttonConfig = JSON.parse(event.data);
-          createButtons(buttonConfig);
+          console.log("📨 Received:", event.data);
+          try {
+            buttonConfig = JSON.parse(event.data);
+            console.log("📋 Config parsed successfully");
+            createButtons(buttonConfig);
+          } catch (error) {
+            console.error("❌ Error parsing config:", error);
+          }
         };
 
         ws.onclose = () => {
-          console.log("Disconnected from WebSocket server");
+          console.log("❌ Disconnected from WebSocket server. Reconnecting...");
+          document.body.style.backgroundColor = "#600"; // Red tint when disconnected
           setTimeout(connectWebSocket, 1000);
         };
 
         ws.onerror = (error) => {
-          console.error("WebSocket error:", error);
+          console.error("❌ WebSocket error:", error);
+          document.body.style.backgroundColor = "#600"; // Red tint on error
         };
       }
 
@@ -301,11 +318,26 @@
       });
 
       function createButtons(config) {
+        console.log("createButtons called with config:", config);
         const container = document.getElementById("grid-container");
+        if (!container) {
+          console.error("grid-container not found!");
+          return;
+        }
         container.innerHTML = "";
+        
+        // Add default position if missing
+        Object.keys(config).forEach((key, index) => {
+          if (!config[key].position) {
+            config[key].position = index + 1;
+          }
+        });
+        
         const sortedButtons = Object.entries(config).sort(
-          (a, b) => a[1].position - b[1].position
+          (a, b) => (a[1].position || 0) - (b[1].position || 0)
         );
+        
+        console.log("Creating", sortedButtons.length, "buttons");
 
         for (let [buttonId, buttonData] of sortedButtons) {
           const button = document.createElement("div");

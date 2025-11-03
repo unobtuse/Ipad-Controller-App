@@ -1,102 +1,127 @@
 {
     "button_1": {
         "name": "COCKPIT",
-        "classes": "purple-button"
+        "classes": "purple-button",
+        "position": 1
     },
     "button_2": {
         "name": "AIRCRAFT",
-        "classes": "purple-button"
+        "classes": "purple-button",
+        "position": 2
     },
     "button_3": {
         "name": "FLY BY",
-        "classes": "purple-button"
+        "classes": "purple-button",
+        "position": 3
     },
     "button_4": {
         "name": "Mounted",
-        "classes": "purple-button"
+        "classes": "purple-button",
+        "position": 4
     },
     "button_5": {
         "name": "Nearest ac",
-        "classes": "purple-button"
+        "classes": "purple-button",
+        "position": 5
     },
     "button_6": {
         "name": "Released wep",
-        "classes": "purple-button"
+        "classes": "purple-button",
+        "position": 6
     },
     "button_7": {
         "name": "GROUND",
-        "classes": "purple-button"
+        "classes": "purple-button",
+        "position": 7
     },
     "button_8": {
         "name": "Ship",
-        "classes": "purple-button"
+        "classes": "purple-button",
+        "position": 8
     },
     "button_9": {
         "name": "THEATER",
-        "classes": "purple-button"
+        "classes": "purple-button",
+        "position": 9
     },
     "button_10": {
         "name": "Airport",
-        "classes": "purple-button"
+        "classes": "purple-button",
+        "position": 10
     },
     "button_11": {
         "name": "",
-        "classes": "hidden-button"
+        "classes": "hidden-button",
+        "position": 11
     },
     "button_12": {
         "name": "",
-        "classes": "hidden-button"
+        "classes": "hidden-button",
+        "position": 12
     },
     "button_13": {
         "name": "Auto start",
-        "classes": "green-button"
+        "classes": "green-button",
+        "position": 13
     },
     "button_14": {
         "name": "",
-        "classes": "hidden-button"
+        "classes": "hidden-button",
+        "position": 14
     },
     "button_15": {
         "name": "",
-        "classes": "hidden-button"
+        "classes": "hidden-button",
+        "position": 15
     },
     "button_16": {
         "name": "",
-        "classes": "hidden-button"
+        "classes": "hidden-button",
+        "position": 16
     },
     "button_17": {
         "name": "",
-        "classes": "hidden-button"
+        "classes": "hidden-button",
+        "position": 17
     },
     "button_18": {
         "name": "",
-        "classes": "hidden-button"
+        "classes": "hidden-button",
+        "position": 18
     },
     "button_19": {
         "name": "",
-        "classes": "hidden-button"
+        "classes": "hidden-button",
+        "position": 19
     },
     "button_20": {
         "name": "Open",
-        "classes": "yellow-button"
+        "classes": "yellow-button",
+        "position": 20
     },
     "button_21": {
         "name": "",
-        "classes": "hidden-button"
+        "classes": "hidden-button",
+        "position": 21
     },
     "button_22": {
         "name": "",
-        "classes": "hidden-button"
+        "classes": "hidden-button",
+        "position": 22
     },
     "button_23": {
         "name": "",
-        "classes": "hidden-button"
+        "classes": "hidden-button",
+        "position": 23
     },
     "button_24": {
         "name": "Park",
-        "classes": "red-button"
+        "classes": "red-button",
+        "position": 24
     },
     "button_25": {
         "name": "Close",
-        "classes": "yellow-button"
+        "classes": "yellow-button",
+        "position": 25
     }
 }
