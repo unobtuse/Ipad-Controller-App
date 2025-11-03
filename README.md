@@ -4,12 +4,12 @@ A customizable, web-based virtual gamepad that turns your iPad, tablet, or any d
 
 ## 🎮 Features
 
-- **25 Customizable Buttons**: Configure a 5×5 grid of buttons with custom labels and colors
+- **25 Customizable Buttons**: Configure a 5×5 grid of buttons with customizable labels and colors
 - **Real-Time Input**: Low-latency WebSocket communication for instant button response
 - **Touch-Optimized**: Designed specifically for iPad and touch devices with visual feedback
 - **Drag & Drop Editor**: Easily rearrange buttons and customize the layout
-- **8 Color Themes**: Red, Blue, Green, Yellow, Orange, Purple, White, and Gray/Hidden
-- **vJoy Integration**: Maps button presses to virtual joystick inputs on Windows
+- **8 Color Options**: Red, Blue, Green, Yellow, Orange, Purple, White, and Gray/Hidden
+- **vJoy Integration**: Maps button presses to virtual joystick inputs in Windows
 - **Live Configuration**: Edit button labels, colors, and positions without restarting
 - **Persistent Settings**: Button configuration automatically saves to `config.json`
 
