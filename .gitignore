@@ -71,3 +71,16 @@ Working1/
 .coverage
 htmlcov/
 
+# Internal Developer Documentation (exclude from public repo)
+GITHUB_UPLOAD_CHECKLIST.md
+PROJECT_SUMMARY.md
+*_NOTES.md
+*_TODO.md
+INTERNAL_*.md
+DEV_*.md
+
+
+
+
+
+
